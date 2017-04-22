@@ -1,0 +1,187 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/phated/gulp-wrap-amd">gulp-wrap-amd (v0.5.0)</a>
+</h1>
+<h4>Wrap files with an AMD wrapper</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.gulp-wrap-amd">module gulp-wrap-amd</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-wrap-amd.gulp-wrap-amd">
+            function <span class="apidocSignatureSpan"></span>gulp-wrap-amd
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">gulp-wrap-amd.</span>template</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.gulp-wrap-amd.template">module gulp-wrap-amd.template</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-wrap-amd.template.amd">
+            function <span class="apidocSignatureSpan">gulp-wrap-amd.template.</span>amd
+            <span class="apidocSignatureSpan">(obj)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">gulp-wrap-amd.template.</span>templates</span>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.gulp-wrap-amd" id="apidoc.module.gulp-wrap-amd">module gulp-wrap-amd</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-wrap-amd.gulp-wrap-amd" id="apidoc.element.gulp-wrap-amd.gulp-wrap-amd">
+        function <span class="apidocSignatureSpan"></span>gulp-wrap-amd
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">gulp-wrap-amd = function (options){
+
+  function WrapAMD(file, enc, cb){
+    var opts = getOptions(file, options);
+
+    if(file.isStream()){
+      this.emit('error', new PluginError('gulp-wrap-amd', 'Streaming not supported'));
+      return cb();
+    }
+
+    if(file.isBuffer()){
+      file.contents = new Buffer(compile(String(file.contents), opts));
+    }
+
+    this.push(file);
+    cb();
+  }
+
+  return through.obj(WrapAMD);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.gulp-wrap-amd.template" id="apidoc.module.gulp-wrap-amd.template">module gulp-wrap-amd.template</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-wrap-amd.template.amd" id="apidoc.element.gulp-wrap-amd.template.amd">
+        function <span class="apidocSignatureSpan">gulp-wrap-amd.template.</span>amd
+        <span class="apidocSignatureSpan">(obj)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">amd = function (obj) {
+  obj || (obj = {});
+  var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+  function print() { __p += __j.call(arguments, '') }
+  with (obj) {
+  __p += 'define(' +
+  ((__t = ( name ? JSON.stringify(name) + ',' : '' )) == null ? '' : __t) +
+  '' +
+  ((__t = ( deps ? JSON.stringify(deps) + ',' : '' )) == null ? '' : __t) +
+  'function(' +
+  ((__t = ( (!deps ? ['require', 'exports', 'module'] : params || '').toString() )) == null ? '' : __t) +
+  '){\n';
+   if(exports){
+  __p += '\n' +
+  ((__t = ( contents )) == null ? '' : __t) +
+  '\nreturn ' +
+  ((__t = ( exports )) == null ? '' : __t) +
+  ';\n';
+   } else {
+  __p += '\nreturn ' +
+  ((__t = ( contents )) == null ? '' : __t) +
+  ';\n';
+   }
+  __p += '\n});\n';
+
+  }
+  return __p
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
